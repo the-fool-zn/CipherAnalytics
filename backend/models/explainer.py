@@ -28,4 +28,5 @@ def explain_prediction(algorithm: str, confidence: float) -> str:
         )
         return response.text.strip()
     except Exception as e:
+        print(f"GEMINI ERROR: {e}")
         return "Explanation unavailable right now."
