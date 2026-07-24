@@ -1,5 +1,5 @@
 fastapi
 uvicorn
 numpy
-tflite-runtime
+ai-edge-litert
 google-generativeai

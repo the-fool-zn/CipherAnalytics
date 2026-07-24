@@ -2,7 +2,7 @@ import os
 import time
 import json
 import numpy as np
-import tflite_runtime.interpreter as tflite
+from ai_edge_litert.interpreter import Interpreter
 
 # --------------------------------------------------
 # Paths
@@ -21,7 +21,7 @@ LABEL_CLASSES_PATH = os.path.join(AI_DIR, "label_classes.json")
 
 print("Loading CipherAnalytics AI Model (TFLite)...")
 
-interpreter = tflite.Interpreter(model_path=MODEL_PATH)
+interpreter = Interpreter(model_path=MODEL_PATH)
 interpreter.allocate_tensors()
 
 input_details = interpreter.get_input_details()
