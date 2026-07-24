@@ -1,6 +1,5 @@
 fastapi
 uvicorn
-tensorflow-cpu
 numpy
-scikit-learn
+tflite-runtime
 google-generativeai
