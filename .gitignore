@@ -1,10 +1,13 @@
 # Python
+.venv/
 venv/
 __pycache__/
 *.pyc
 
 # Environment Variables
 .env
+.env.local
+.env*.local
 
 # Node.js
 node_modules/
@@ -18,3 +21,5 @@ node_modules/
 # OS
 Thumbs.db
 .DS_Store
+training/outputs/
+training/dataset/

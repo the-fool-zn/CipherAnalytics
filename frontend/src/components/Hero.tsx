@@ -17,7 +17,7 @@ export default function Hero() {
             </span>
           </h1>
 
-          <p className="mt-8 text-lg text-slate-300 leading-8">
+          <p className="mt-8 text-lg leading-8 text-slate-300">
             CipherAnalytics uses Deep Learning to classify encrypted
             ciphertext into its originating cryptographic algorithm,
             enabling faster security analysis and research.
@@ -25,13 +25,21 @@ export default function Hero() {
 
           <div className="mt-10 flex gap-4">
 
-            <button className="rounded-xl bg-blue-600 px-8 py-4 font-semibold hover:bg-blue-700 transition">
+            <a
+              href="#predict"
+              className="rounded-xl bg-blue-600 px-8 py-4 font-semibold text-white transition hover:bg-blue-700"
+            >
               Try Demo
-            </button>
+            </a>
 
-            <button className="rounded-xl border border-slate-700 px-8 py-4 hover:bg-slate-800 transition">
+            <a
+              href="https://github.com/the-fool-zn/CipherAnalytics"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="rounded-xl border border-slate-700 px-8 py-4 font-semibold text-white transition hover:bg-slate-800"
+            >
               Documentation
-            </button>
+            </a>
 
           </div>
 
@@ -43,8 +51,7 @@ export default function Hero() {
 
           <div className="rounded-2xl border border-slate-800 bg-slate-900 p-8 shadow-2xl">
 
-            <div className="font-mono text-green-400">
-
+            <div className="font-mono text-green-400 whitespace-pre-line">
 {`$ cipheranalytics predict
 
 Uploading ciphertext...
@@ -58,9 +65,7 @@ Confidence:
 98.74%
 
 Status:
-Secure Encryption
-`}
-
+Secure Encryption`}
             </div>
 
           </div>

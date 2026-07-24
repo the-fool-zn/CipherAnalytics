@@ -4,6 +4,7 @@ import Features from "@/components/Features";
 import HowItWorks from "@/components/HowItWorks";
 import SupportedAlgorithms from "@/components/SupportedAlgorithms";
 import Architecture from "@/components/Architecture";
+import PredictSection from "@/components/PredictSection";
 import CTA from "@/components/CTA";
 import Footer from "@/components/Footer";
 
@@ -16,6 +17,9 @@ export default function Home() {
       <HowItWorks />
       <SupportedAlgorithms />
       <Architecture />
+
+      <PredictSection />
+
       <CTA />
       <Footer />
     </>
