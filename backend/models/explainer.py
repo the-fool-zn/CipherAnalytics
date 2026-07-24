@@ -1,7 +1,7 @@
 import os
-from openai import OpenAI
+import google.generativeai as genai
 
-client = OpenAI(api_key=os.environ.get("OPENAI_API_KEY"))
+genai.configure(api_key=os.environ.get("GEMINI_API_KEY"))
 
 SYSTEM_PROMPT = """You are a cryptography tutor embedded in an app called CipherAnalytics.
 A machine learning model has just predicted which encryption algorithm produced a piece of ciphertext.
@@ -15,18 +15,17 @@ Your response must:
 
 Do not repeat the raw confidence number back verbatim; describe it qualitatively (e.g. "high confidence", "somewhat uncertain")."""
 
+model = genai.GenerativeModel(
+    model_name="gemini-2.0-flash",
+    system_instruction=SYSTEM_PROMPT
+)
+
 
 def explain_prediction(algorithm: str, confidence: float) -> str:
     try:
-        response = client.chat.completions.create(
-            model="gpt-4o-mini",
-            messages=[
-                {"role": "system", "content": SYSTEM_PROMPT},
-                {"role": "user", "content": f"Predicted algorithm: {algorithm}\nConfidence: {confidence}"}
-            ],
-            max_tokens=200,
-            temperature=0.4,
+        response = model.generate_content(
+            f"Predicted algorithm: {algorithm}\nConfidence: {confidence}"
         )
-        return response.choices[0].message.content.strip()
+        return response.text.strip()
     except Exception as e:
         return "Explanation unavailable right now."
