@@ -78,20 +78,20 @@ The model used is `openai/gpt-oss-20b:free` via OpenRouter's free tier.
 
 ## Screenshots
 
-<!-- Add your screenshots here. Example: -->
-<!-- ![Homepage](./screenshots/homepage.png) -->
+**1. Homepage — Hero section**
 
-**1. Homepage / Hero section**
+<img width="1920" height="1080" alt="Home Page" src="https://github.com/user-attachments/assets/0a683447-74f6-48bf-bca7-46d035f46c17" />
 
-`(add screenshot here)`
 
-**2. Live prediction with AI explanation**
+**2. How It Works & Supported Algorithms**
 
-`(add screenshot here)`
+<img width="1920" height="1080" alt="How it works" src="https://github.com/user-attachments/assets/df1b15db-3d8a-4540-84bf-b881001c1025" />
 
-**3. Ciphertext statistics and prediction history**
 
-`(add screenshot here)`
+**3. Live prediction with AI explanation, top predictions, and ciphertext statistics**
+
+<img width="1920" height="1080" alt="Predictions" src="https://github.com/user-attachments/assets/1a903ff4-34bd-4cd9-a6e4-083d8d17702f" />
+
 
 ## How to Run Locally
 
