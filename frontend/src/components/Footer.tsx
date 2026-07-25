@@ -13,7 +13,7 @@ export default function Footer() {
         </div>
 
         <p className="text-sm">
-          © 2026 CipherAnalytics. Built with Next.js, FastAPI & PyTorch.
+          © 2026 CipherAnalytics. Built with Next.js, FastAPI & TensorFlow.
         </p>
       </div>
     </footer>

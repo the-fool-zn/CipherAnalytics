@@ -50,7 +50,7 @@ export default function Architecture() {
         </div>
 
         <div className="mt-12 text-center text-blue-400 font-mono text-lg">
-          Next.js → FastAPI → PyTorch → Prediction
+          Next.js → FastAPI → TensorFlow Lite → Prediction
         </div>
       </div>
     </section>
