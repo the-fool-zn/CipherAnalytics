@@ -14,18 +14,14 @@ app = FastAPI(
 
 # Allow requests from the Next.js frontend
 # Add your deployed frontend URL via the FRONTEND_URL env var on Render
-frontend_url = os.environ.get("FRONTEND_URL")
-
 allowed_origins = [
     "http://localhost:3000",
+    "https://cipher-analytics-2qgm.vercel.app",
 ]
-
-if frontend_url:
-    allowed_origins.append(frontend_url)
-
 
 app.add_middleware(
     CORSMiddleware,
+    allow_origin_regex=r"https://cipher-analytics-2qgm.*\.vercel\.app",
     allow_origins=allowed_origins,
     allow_credentials=True,
     allow_methods=["*"],
