@@ -20,6 +20,7 @@ type PredictionResult = {
 type UploadBoxProps = {
   onPrediction: (result: PredictionResult) => void;
   setLoading: (value: boolean) => void;
+  onCiphertextChange: (value: string) => void;
 };
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
@@ -27,10 +28,16 @@ const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
 export default function UploadBox({
   onPrediction,
   setLoading,
+  onCiphertextChange,
 }: UploadBoxProps) {
   const [ciphertext, setCiphertext] = useState("");
   const [isAnalyzing, setIsAnalyzing] = useState(false);
   const [fileName, setFileName] = useState("");
+
+  const updateCiphertext = (value: string) => {
+    setCiphertext(value);
+    onCiphertextChange(value);
+  };
 
   const handlePredict = async () => {
     if (!ciphertext.trim()) {
@@ -58,25 +65,25 @@ export default function UploadBox({
       if (!response.ok) {
         const error = await response.json();
         throw new Error(error.detail || "Prediction request failed");
-}
+      }
 
       const data = await response.json();
 
       onPrediction({
-  algorithm: data.algorithm,
-  confidence: data.confidence,
-  inferenceTime: data.inference_time,
-  topPredictions: data.top_predictions,
-  explanation: data.explanation,
-  predictionId: data.prediction_id,
-  timestamp: data.timestamp,
-});
+        algorithm: data.algorithm,
+        confidence: data.confidence,
+        inferenceTime: data.inference_time,
+        topPredictions: data.top_predictions,
+        explanation: data.explanation,
+        predictionId: data.prediction_id,
+        timestamp: data.timestamp,
+      });
 
       toast.success("Prediction completed successfully!");
     } catch (error: any) {
-        console.error(error);
-        toast.error(error.message);
-} finally {
+      console.error(error);
+      toast.error(error.message);
+    } finally {
       setLoading(false);
       setIsAnalyzing(false);
     }
@@ -96,7 +103,7 @@ export default function UploadBox({
         id="ciphertext"
         rows={10}
         value={ciphertext}
-        onChange={(e) => setCiphertext(e.target.value)}
+        onChange={(e) => updateCiphertext(e.target.value)}
         placeholder="Paste encrypted ciphertext here..."
         className="w-full rounded-xl border border-slate-700 bg-slate-950 p-4 text-white outline-none focus:border-blue-500"
       />
@@ -122,7 +129,7 @@ export default function UploadBox({
             try {
               const text = await file.text();
 
-              setCiphertext(text.trim());
+              updateCiphertext(text.trim());
               setFileName(file.name);
 
             } catch (err) {
@@ -144,7 +151,7 @@ export default function UploadBox({
 
       </div>
 
-            <div className="mt-8 flex gap-4">
+      <div className="mt-8 flex gap-4">
 
         <button
           onClick={handlePredict}
@@ -164,7 +171,7 @@ export default function UploadBox({
         <button
           type="button"
           onClick={() => {
-            setCiphertext("");
+            updateCiphertext("");
             setFileName("");
           }}
           className="rounded-xl border border-slate-600 px-8 py-4 font-semibold text-white transition hover:bg-slate-800"
