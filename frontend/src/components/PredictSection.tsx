@@ -6,6 +6,7 @@ import UploadBox from "./prediction/UploadBox";
 import PredictionCard from "./prediction/PredictionCard";
 import PredictionHistory from "./prediction/PredictionHistory";
 import LoadingState from "./prediction/LoadingState";
+import CiphertextStats from "./prediction/CiphertextStats";
 
 type PredictionResult = {
   algorithm: string;
@@ -16,10 +17,13 @@ type PredictionResult = {
     score: number;
   }[];
   explanation: string;
+  predictionId: string;
+  timestamp: string;
 };
 
 export default function PredictSection() {
   const [loading, setLoading] = useState(false);
+  const [ciphertext, setCiphertext] = useState("");
 
   const [result, setResult] =
     useState<PredictionResult | null>(null);
@@ -59,6 +63,7 @@ export default function PredictSection() {
               ]);
             }}
             setLoading={setLoading}
+            onCiphertextChange={setCiphertext}
           />
 
           <div ref={resultRef}>
@@ -73,7 +78,13 @@ export default function PredictSection() {
                   inferenceTime={result.inferenceTime}
                   topPredictions={result.topPredictions}
                   explanation={result.explanation}
+                  predictionId={result.predictionId}
+                  timestamp={result.timestamp}
                 />
+
+                <div className="mt-6">
+                  <CiphertextStats ciphertext={ciphertext} />
+                </div>
 
                 <PredictionHistory
                   history={history}

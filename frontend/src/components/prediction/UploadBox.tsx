@@ -1,5 +1,6 @@
 "use client";
 
+import toast from "react-hot-toast";
 import { useState } from "react";
 import { Loader2 } from "lucide-react";
 
@@ -12,6 +13,8 @@ type PredictionResult = {
     score: number;
   }[];
   explanation: string;
+  predictionId: string;
+  timestamp: string;
 };
 
 type UploadBoxProps = {
@@ -31,7 +34,7 @@ export default function UploadBox({
 
   const handlePredict = async () => {
     if (!ciphertext.trim()) {
-      alert("Please enter ciphertext first.");
+      toast.error("Please enter ciphertext first.");
       return;
     }
 
@@ -53,22 +56,27 @@ export default function UploadBox({
       );
 
       if (!response.ok) {
-        throw new Error("Prediction request failed");
-      }
+        const error = await response.json();
+        throw new Error(error.detail || "Prediction request failed");
+}
 
       const data = await response.json();
 
       onPrediction({
-        algorithm: data.algorithm,
-        confidence: data.confidence,
-        inferenceTime: data.inference_time,
-        topPredictions: data.top_predictions,
-        explanation: data.explanation,
-      });
-    } catch (error) {
-      console.error(error);
-      alert("Unable to connect to CipherAnalytics API.");
-    } finally {
+  algorithm: data.algorithm,
+  confidence: data.confidence,
+  inferenceTime: data.inference_time,
+  topPredictions: data.top_predictions,
+  explanation: data.explanation,
+  predictionId: data.prediction_id,
+  timestamp: data.timestamp,
+});
+
+      toast.success("Prediction completed successfully!");
+    } catch (error: any) {
+        console.error(error);
+        toast.error(error.message);
+} finally {
       setLoading(false);
       setIsAnalyzing(false);
     }
@@ -119,7 +127,7 @@ export default function UploadBox({
 
             } catch (err) {
               console.error(err);
-              alert("Unable to read the selected file.");
+              toast.error("Unable to read the selected file.");
             }
           }}
           className="block w-full rounded-lg border border-slate-700 bg-slate-950 p-3 text-white

@@ -8,8 +8,8 @@ const architecture = [
     description: "Handles API requests, validation, preprocessing, and communication with the AI model.",
   },
   {
-    title: "PyTorch AI Model",
-    description: "Processes ciphertext and predicts the most likely cryptographic algorithm.",
+    title: "TensorFlow Lite CNN",
+    description: "Optimized TensorFlow Lite model for fast cryptographic algorithm prediction.",
   },
   {
     title: "Prediction Results",
