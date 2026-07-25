@@ -64,6 +64,8 @@ type PredictionCardProps = {
   inferenceTime: number;
   topPredictions: Prediction[];
   explanation: string;
+  predictionId: string;
+  timestamp: string;
 };
 
 export default function PredictionCard({
@@ -72,6 +74,8 @@ export default function PredictionCard({
   inferenceTime,
   topPredictions,
   explanation,
+  predictionId,
+  timestamp,
 }: PredictionCardProps) {
   const info =
     algorithmInfo[
