@@ -38,6 +38,10 @@ Backend API: [https://cipheranalytics-api.onrender.com](https://cipheranalytics-
 
 CipherAnalytics uses two AI components working together:
 
+### Model Notes
+
+The CNN classifier was trained on a labeled cryptography dataset from Kaggle. It demonstrates the full pipeline—preprocessing, training, inference, and deployment—while AI explanations are generated using OpenRouter's free LLM API. Since free LLMs do not support ciphertext recognition and public datasets are limited, prediction accuracy remains constrained. CipherAnalytics is a working proof-of-concept for AI-assisted cipher identification and will continue to be improved with more capable models and datasets.
+
 **1. A trained CNN classifier** (TensorFlow/Keras, converted to TensorFlow Lite for deployment) predicts the cryptographic algorithm from the ciphertext's character sequence and numerical features (key length, ciphertext length). Trained on a labeled cryptography dataset covering AES, DES, Triple DES, Blowfish, RC4, ChaCha20, RSA, and ECC.
 
 **2. An LLM explanation layer**, called via [OpenRouter](https://openrouter.ai), takes the CNN's prediction (algorithm + confidence) and generates a short, plain-language explanation for the user. This is the system prompt used:
@@ -75,6 +79,24 @@ The model used is `openai/gpt-oss-20b:free` via OpenRouter's free tier.
 | Backend hosting | Render (free tier) |
 | Version control | Git / GitHub |
 | Notifications | react-hot-toast |
+
+## Architecture
+
+```text
+User
+   │
+   ▼
+Next.js Frontend
+   │
+   ▼
+FastAPI Backend
+   ├────────► TensorFlow Lite CNN
+   │
+   └────────► OpenRouter LLM
+                   │
+                   ▼
+            Explanation
+```
 
 ## Screenshots
 
@@ -153,6 +175,16 @@ CipherAnalytics/
 └── training/                   # Model training pipeline (preprocessing, training scripts)
 ```
 
+## Future Work
+
+- Train on larger and more diverse cryptographic datasets
+- Improve classification accuracy using transformer-based models
+- Support additional encryption algorithms
+- Add batch ciphertext analysis
+- Compare predictions from multiple AI models
+
 ## Author
 
-Built by Muhammad Zain Nasir as an individual final project.
+Built by **Muhammad Zain Nasir**
+
+GitHub: **[@the-fool-zn](https://github.com/the-fool-zn)**
