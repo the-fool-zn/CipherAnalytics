@@ -2,7 +2,7 @@ import pickle
 import json
 import tensorflow as tf
 
-# Load your existing trained model
+# Load your existing trained model (so that we can manipulate it)
 model = tf.keras.models.load_model("backend/ai/cnn_model.keras")
 
 # Convert to TFLite (much smaller, much lighter to run)
