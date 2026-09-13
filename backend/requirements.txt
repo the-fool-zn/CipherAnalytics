@@ -3,3 +3,4 @@ uvicorn
 numpy
 ai-edge-litert
 requests
+that's all
