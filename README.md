@@ -1,5 +1,5 @@
 # CipherAnalytics
-
+(Ciphertexts)
 **AI-powered cryptographic algorithm identification platform**
 
 CipherAnalytics uses a deep learning model to analyze ciphertext and predict which cryptographic algorithm was used to produce it — then uses a large language model to explain the result in plain language.
