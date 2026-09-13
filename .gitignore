@@ -23,3 +23,5 @@ Thumbs.db
 .DS_Store
 training/outputs/
 training/dataset/
+
+#that's all
